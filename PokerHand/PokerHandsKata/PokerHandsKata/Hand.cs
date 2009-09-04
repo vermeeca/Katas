@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PokerHandsKata
 {
@@ -21,6 +22,9 @@ namespace PokerHandsKata
 
                 Cards.Add(new Card(valueParser.Parse(value), suitParser.Parse(suit)));
             }
+
+            //sort, for ease of evaluation
+            Cards.Sort();
             
         }
 
@@ -30,14 +34,37 @@ namespace PokerHandsKata
         }
 
 
-        public int CompareTo(Hand other)
-        {
-            return 0;
-        }
-
         public int CompareTo(object obj)
         {
-            return 0;
+            var other = obj as Hand;
+            if(other != null)
+            {
+                return this.GetScore().CompareTo(other.GetScore());
+            }
+
+            return 1;
         }
+
+        private int GetScore()
+        {
+            int baseValue = Enum.GetValues(typeof (CardValue)).Length;
+            
+            int score = 0;
+
+            //bah.  come back later to this.
+            //////find pairs
+            ////var pairs = (from c in Cards
+            ////            join c2 in Cards on c equals c2
+            ////            select (int)c.Value*baseValue).ToList();
+
+            //pairs.ForEach((p) => score += p);
+
+
+            score += (int)this.Cards[Cards.Count - 1].Value;
+
+            return score;
+        }
+
+
     }
 }
