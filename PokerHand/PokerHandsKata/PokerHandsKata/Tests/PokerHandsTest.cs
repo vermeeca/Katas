@@ -8,13 +8,15 @@ namespace PokerHandsKata
     [TestFixture]
     public class PokerHandsTest
     {
+
+
         [Test]
-        public void Scenario1_WhiteWins()
+        public void Scenario1_HighCardWins()
         {
             var whiteHand = new Hand("2H 3D 5S 9C KD");
             var blackHand = new Hand("2C 3H 4S 8C AH");
 
-            Assert.Greater(whiteHand, blackHand, "White should be the winner");
+            Assert.Greater(blackHand, whiteHand, "Black should be the winner");
         }
 
         [Test]
