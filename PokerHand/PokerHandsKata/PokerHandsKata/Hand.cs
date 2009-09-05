@@ -22,9 +22,6 @@ namespace PokerHandsKata
 
                 Cards.Add(new Card(valueParser.Parse(value), suitParser.Parse(suit)));
             }
-
-            //sort, for ease of evaluation
-            Cards.Sort();
             
         }
 
@@ -47,20 +44,22 @@ namespace PokerHandsKata
 
         private int GetScore()
         {
-            int baseValue = Enum.GetValues(typeof (CardValue)).Length;
             
             int score = 0;
 
             //bah.  come back later to this.
-            //////find pairs
-            ////var pairs = (from c in Cards
-            ////            join c2 in Cards on c equals c2
-            ////            select (int)c.Value*baseValue).ToList();
+            //find pairs
+            var pairs = (from c in Cards
+                         join c2 in Cards on c.Value equals c2.Value
+                         where Object.ReferenceEquals(c, c2) == false
+                         select (int)c.Value * Card.VALUES).Distinct().ToList();
 
-            //pairs.ForEach((p) => score += p);
+            pairs.ForEach((p) => score += p);
 
 
-            score += (int)this.Cards[Cards.Count - 1].Value;
+            //high card
+            Cards.ForEach(c => score += (int)c.Value);
+               
 
             return score;
         }

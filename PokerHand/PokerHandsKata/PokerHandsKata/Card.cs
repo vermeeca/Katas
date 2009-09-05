@@ -4,6 +4,8 @@ namespace PokerHandsKata
 {
     public class Card : IComparable
     {
+        public const int VALUES = 13;
+        public const int SUITS = 4;
 
         public CardValue Value { get; private set; }
         public CardSuit Suit { get; private set; }

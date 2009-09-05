@@ -20,12 +20,30 @@ namespace PokerHandsKata
         }
 
         [Test]
+        public void HighCard2()
+        {
+            var whiteHand = new Hand("2H 3D 5S 9C KD");
+            var blackHand = new Hand("2C 3H 4S 8C KH");
+
+            Assert.Greater(blackHand, whiteHand, "Black should be the winner");
+        }
+
+        [Test]
         public void PairBeatsHighCard()
         {
             var whiteHand = new Hand("2H 4S 5C 2D 6H");
             var blackHand = new Hand("2S 8S AS QS 3S");
 
             Assert.Greater(whiteHand, blackHand, "White should be the winner");
+        }
+
+        [Test]
+        public void HighPairBeatsLowPair()
+        {
+            var whiteHand = new Hand("2H 4S 5C 2D 6H");
+            var blackHand = new Hand("2S 8S AS QS 8S");
+
+            Assert.Greater(blackHand, whiteHand, "Black should be the winner");
         }
 
 
@@ -38,14 +56,7 @@ namespace PokerHandsKata
             Assert.Greater(whiteHand, blackHand, "White should be the winner");
         }
 
-        [Test]
-        public void HighCard2()
-        {
-            var whiteHand = new Hand("2H 3D 5S 9C KD");
-            var blackHand = new Hand("2C 3H 4S 8C KH");
-
-            Assert.Greater(blackHand, whiteHand, "Black should be the winner");
-        }
+        
 
         [Test]
         public void Tie()
