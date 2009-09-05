@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Card.cs" />
     <Compile Include="CardSuit.cs" />
+    <Compile Include="CardValueExtensions.cs" />
     <Compile Include="Tests\CardTests.cs" />
     <Compile Include="CardValue.cs" />
     <Compile Include="Hand.cs" />
