@@ -47,6 +47,15 @@ namespace PokerHandsKata
         }
 
         [Test]
+        public void HighCardTie()
+        {
+            var whiteHand = new Hand("3H 4D 5S 9C KD");
+            var blackHand = new Hand("3C 4H 5S 9C KH");
+
+            Assert.AreEqual(0, whiteHand.CompareTo(blackHand), "Should be a tie");
+        }
+
+        [Test]
         public void PairBeatsHighCard()
         {
             var whiteHand = new Hand("2H 4S 5C 2D 6H");
@@ -89,6 +98,24 @@ namespace PokerHandsKata
             var blackHand = new Hand("2S 4S 4S 2S AS");
 
             Assert.Greater(whiteHand, blackHand, "White should be the winner");
+        }
+
+        [Test]
+        public void SameTwoPairTakeHighestCard()
+        {
+            var whiteHand = new Hand("2H 5S 5C 2D AH");
+            var blackHand = new Hand("2S 5H 5D 2S JS");
+
+            Assert.Greater(whiteHand, blackHand, "White should be the winner");
+        }
+
+        [Test]
+        public void ThreeOfAKindBeatsTwoPair()
+        {
+            var high = new Hand("2H 2S 5C 2D AH");
+            var low = new Hand("2S 5H 5D 2S JS");
+
+            Assert.Greater(high, low);
         }
 
 

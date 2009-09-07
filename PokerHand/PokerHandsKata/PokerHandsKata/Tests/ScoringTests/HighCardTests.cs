@@ -8,7 +8,7 @@ using PokerHandsKata.Scoring;
 namespace PokerHandsKata.Tests.ScoringTests
 {
     [TestFixture]
-    public class HighCardScoreTests
+    public class HighCardTests
     {
         [Test]
         public void TestLess()

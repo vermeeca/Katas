@@ -16,6 +16,9 @@ namespace PokerHandsKata
             var suitParser = new SuitParser();
             var valueParser = new ValueParser();
 
+            
+
+
             foreach (var card in cards)
             {
                 string suit = card.Substring(card.Length - 1);
@@ -47,6 +50,24 @@ namespace PokerHandsKata
         {
 
             CompositeScore handScore = new CompositeScore();
+
+            //pairs
+            var pairs = (from c in Cards
+                         join c2 in Cards on c.Value equals c2.Value
+                         where object.ReferenceEquals(c, c2) == false
+                         select c.Value).Distinct().ToList();
+
+            if (pairs.Count == 1)
+            {
+                pairs.ForEach(p => handScore.Add(new PairScore(p)));
+            }
+            else if(pairs.Count == 2)
+            {
+                handScore.Add(new TwoPairScore(pairs[0], pairs[1]));
+            }
+
+            
+
 
             //high card
             Cards.ForEach(c => handScore.Add(new HighCardScore(c.Value)));

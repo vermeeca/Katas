@@ -34,17 +34,23 @@ namespace PokerHandsKata.Scoring
             var mySortedScores = GetScoresSorted();
             var otherSortedScores = otherComp.GetScoresSorted();
 
+            //magic value.  argh
+            var result = Int32.MinValue;
             for(int i = 0; i < (mySortedScores.Count < otherSortedScores.Count ? mySortedScores.Count : otherSortedScores.Count); i++)
             {
-                var result = mySortedScores[i].CompareTo(otherSortedScores[i]);
-                if(result != 0)
+                result = mySortedScores[i].CompareTo(otherSortedScores[i]);
+                if (result != 0)
                 {
-                    return result;
+                    break;
                 }
             }
 
-            //wha?
-            throw new InvalidOperationException("I think I need to refactor this method");
+            if (result == Int32.MinValue)
+            {
+                throw new InvalidOperationException("Should not have gotten here.");
+            }
+
+            return result;
 
         }
 
