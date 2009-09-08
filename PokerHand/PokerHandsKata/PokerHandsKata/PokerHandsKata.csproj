@@ -63,6 +63,8 @@
     <Compile Include="Tests\ScoringTests\CompositeScoreTests.cs" />
     <Compile Include="Scoring\FlushScore.cs" />
     <Compile Include="Tests\ScoringTests\FlushTests.cs" />
+    <Compile Include="Scoring\FullHouseScore.cs" />
+    <Compile Include="Tests\ScoringTests\FullHouseTests.cs" />
     <Compile Include="Tests\ScoringTests\HighCardTests.cs" />
     <Compile Include="Scoring\PairScore.cs" />
     <Compile Include="Tests\ScoringTests\PairTests.cs" />
