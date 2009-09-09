@@ -64,6 +64,8 @@
     <Compile Include="Scoring\FlushScore.cs" />
     <Compile Include="Tests\ScoringTests\FlushTests.cs" />
     <Compile Include="Scoring\FullHouseScore.cs" />
+    <Compile Include="Scoring\FourOfAKindScore.cs" />
+    <Compile Include="Tests\ScoringTests\FourOfAKindTests.cs" />
     <Compile Include="Tests\ScoringTests\FullHouseTests.cs" />
     <Compile Include="Tests\ScoringTests\HighCardTests.cs" />
     <Compile Include="Scoring\PairScore.cs" />
@@ -71,6 +73,8 @@
     <Compile Include="Scoring\TwoPairScore.cs" />
     <Compile Include="Scoring\ThreeOfAKindScore.cs" />
     <Compile Include="Scoring\StraightScore.cs" />
+    <Compile Include="Scoring\StraightFlushScore.cs" />
+    <Compile Include="Tests\ScoringTests\StraightFlushTests.cs" />
     <Compile Include="Tests\ScoringTests\StraightTests.cs" />
     <Compile Include="Tests\ScoringTests\ThreeOfAKindTests.cs" />
     <Compile Include="Tests\ScoringTests\TwoPairTests.cs" />
