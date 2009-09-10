@@ -46,10 +46,26 @@ namespace PokerHandsKata
             return 1;
         }
 
+        //okay, I'm at the point where this is definitely going to need refactored
         private IScore GetScore()
         {
 
             CompositeScore handScore = new CompositeScore();
+
+            //three of a kind
+            var sets = from c in Cards
+                       join c2 in Cards on c.Value equals c2.Value
+                       where object.ReferenceEquals(c, c2) == false
+                       select c;
+
+            var threeOfAKind = from s in sets
+                               group s by s.Value
+                               into three
+                                   where three.Count() == 3
+                                   select three.Key;
+                                
+
+                                    
 
             //pairs
             var pairs = (from c in Cards
