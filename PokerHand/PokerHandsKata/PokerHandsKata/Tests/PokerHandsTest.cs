@@ -59,7 +59,7 @@ namespace PokerHandsKata
         public void PairBeatsHighCard()
         {
             var whiteHand = new Hand("2H 4S 5C 2D 6H");
-            var blackHand = new Hand("2S 8S AS QS 3S");
+            var blackHand = new Hand("2S 8H AS QS 3S");
 
             Assert.Greater(whiteHand, blackHand, "White should be the winner");
         }
@@ -86,7 +86,7 @@ namespace PokerHandsKata
         public void TwoPairBeatsOnePair()
         {
             var whiteHand = new Hand("2H 3S 3C 2D JH");
-            var blackHand = new Hand("AS 8S 3S QS AS");
+            var blackHand = new Hand("AS 8S 3H QS AS");
 
             Assert.Greater(whiteHand, blackHand, "White should be the winner");
         }
@@ -95,7 +95,7 @@ namespace PokerHandsKata
         public void TwoPairTakeHighestPair()
         {
             var whiteHand = new Hand("2H 5S 5C 2D JH");
-            var blackHand = new Hand("2S 4S 4S 2S AS");
+            var blackHand = new Hand("2S 4S 4S 2H AS");
 
             Assert.Greater(whiteHand, blackHand, "White should be the winner");
         }
@@ -118,19 +118,64 @@ namespace PokerHandsKata
             Assert.Greater(high, low);
         }
 
+		[Test]
+		public void StraightBeatsThreeOfAKind()
+		{
+			var high = new Hand("2H 3S 4S 5S 6S");
+			var low = new Hand("2H 3S 7S 7C 7H");
 
-        [Test]
-        public void FullHouseBeatsHighCard()
+			Assert.Greater(high, low);
+		}
+
+		[Test]
+		public void NotAStraight()
+		{
+			var high = new Hand("2H 3S 3S 5S 6S");
+			var low = new Hand("2H 3S 4S 5C 7H");
+
+			Assert.Greater(high, low);
+		}
+
+		[Test]
+		public void FlushBeatsStraight()
+		{
+			var high = new Hand("2H 3H 4H 5H 7H");
+			var low = new Hand("10H JS QS KC AH");
+
+			Assert.Greater(high, low);
+		}
+
+
+    	[Test]
+        public void FullHouseBeatsFlush()
         {
             var whiteHand = new Hand("2H 4S 4C 2D 4H");
-            var blackHand = new Hand("2S 8S AS QS 3S");
+			var blackHand = new Hand("2H 3H 4H 5H 7H");
 
             Assert.Greater(whiteHand, blackHand, "White should be the winner");
         }
 
-        
+		[Test]
+		public void FourOfAKindBeatsFullHouse()
+		{
+			var low = new Hand("AH KS KC AD KH");
+			var high = new Hand("2H 2C 2D 2S 5H");
 
-        [Test]
+			Assert.Greater(high, low, "White should be the winner"); 
+		}
+
+		[Test]
+		public void StraightFlushBeatsFourOfAKind()
+		{
+			var high = new Hand("2H 3H 4H 5H 6H");
+			var low = new Hand("AH AC AD AS KH");
+
+			Assert.Greater(high, low, "White should be the winner"); 
+		}
+
+
+
+    	[Test]
         public void Tie()
         {
             var whiteHand = new Hand("2H 3D 5S 9C KD");

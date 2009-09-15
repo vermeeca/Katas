@@ -57,10 +57,10 @@ namespace PokerHandsKata
         	           into g orderby g.Key
         	           	select new {Value=g.Key,Count=g.Count()}).ToList();
 
-        	var suits = from c in Cards
+        	var suits = (from c in Cards
         	            group c by c.Suit
-        	            into g 
-        	            	select new {Suit = g.Key, Count = g.Count()};
+        	            into g where g.Count() == 5
+        	            	select new {Suit = g.Key, Count = g.Count(), High=g.Max(c=>c.Value)}).ToList();
 
 			foreach(var set in sets)
 			{
@@ -96,6 +96,23 @@ namespace PokerHandsKata
 						break;
 
 				}
+			}
+
+			if(sets.Count == 5 && ((sets[4].Value - sets[0].Value) == 4))
+			{
+				if (suits.Count == 1)
+				{
+					handScore.Add(new StraightFlushScore(suits[0].High));
+				}
+				else
+				{
+					handScore.Add(new StraightScore(sets[4].Value));
+				}
+			}
+
+        	if(suits.Count == 1)
+			{
+				handScore.Add(new FlushScore(suits[0].Suit, suits[0].High));
 			}
 
         	return handScore;
