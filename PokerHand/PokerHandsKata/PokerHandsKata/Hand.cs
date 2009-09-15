@@ -49,46 +49,59 @@ namespace PokerHandsKata
         //okay, I'm at the point where this is definitely going to need refactored
         private IScore GetScore()
         {
-
+			
             CompositeScore handScore = new CompositeScore();
 
-            //three of a kind
-            var sets = from c in Cards
-                       join c2 in Cards on c.Value equals c2.Value
-                       where object.ReferenceEquals(c, c2) == false
-                       select c;
+        	var sets = (from c in Cards
+        	           group c by c.Value
+        	           into g orderby g.Key
+        	           	select new {Value=g.Key,Count=g.Count()}).ToList();
 
-            var threeOfAKind = from s in sets
-                               group s by s.Value
-                               into three
-                                   where three.Count() == 3
-                                   select three.Key;
-                                
+        	var suits = from c in Cards
+        	            group c by c.Suit
+        	            into g 
+        	            	select new {Suit = g.Key, Count = g.Count()};
 
-                                    
+			foreach(var set in sets)
+			{
+				switch(set.Count)
+				{
+					case 4:
+						handScore.Add(new FourOfAKindScore(set.Value));
+						break;
+					case 3:
+						var pairAlso = sets.FindLast((s) => s.Count == 2);
+						if (pairAlso == null)
+						{
+							handScore.Add(new ThreeOfAKindScore(set.Value));
+						}
+						else
+						{
+							handScore.Add(new FullHouseScore(set.Value, pairAlso.Value));
+						}
+						break;
+					case 2:
+						var otherPair = sets.FindLast(s => s.Count == 2 && !object.ReferenceEquals(set, s));
+						if(otherPair == null)
+						{
+							handScore.Add(new PairScore(set.Value));
+						}
+						else
+						{
+							handScore.Add(new TwoPairScore(set.Value, otherPair.Value));
+						}
+						break;
+					case 1:
+						handScore.Add(new HighCardScore(set.Value));
+						break;
 
-            //pairs
-            var pairs = (from c in Cards
-                         join c2 in Cards on c.Value equals c2.Value
-                         where object.ReferenceEquals(c, c2) == false
-                         select c.Value).Distinct().ToList();
+				}
+			}
 
-            if (pairs.Count == 1)
-            {
-                pairs.ForEach(p => handScore.Add(new PairScore(p)));
-            }
-            else if(pairs.Count == 2)
-            {
-                handScore.Add(new TwoPairScore(pairs[0], pairs[1]));
-            }
-
-            
+        	return handScore;
 
 
-            //high card
-            Cards.ForEach(c => handScore.Add(new HighCardScore(c.Value)));
 
-            return handScore;
         }
 
 
