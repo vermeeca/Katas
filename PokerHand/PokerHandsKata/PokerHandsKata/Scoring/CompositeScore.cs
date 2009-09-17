@@ -9,10 +9,17 @@ namespace PokerHandsKata.Scoring
 
         private List<IScore> _scores = new List<IScore>();
 
+    	public List<IScore> Scores
+    	{
+			get { return _scores; }
+    	}
+
         public void Add(IScore score)
         {
             _scores.Add(score);
         }
+
+
 
         private List<IScore> GetScoresSorted()
         {
