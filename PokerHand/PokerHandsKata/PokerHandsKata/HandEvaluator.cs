@@ -6,6 +6,10 @@ namespace PokerHandsKata
 {
 	public class HandEvaluator
 	{
+
+		//private Dictionary<Func<ValueSet, SuitSet, bool>
+		
+
 		public IScore Score(Hand hand)
 		{
 			var Cards = hand.Cards;
@@ -15,13 +19,13 @@ namespace PokerHandsKata
 			            group c by c.Value
 			            into g
 			            	orderby g.Key
-			            	select new { Value = g.Key, Count = g.Count() }).ToList();
+			            	select new ValueSet{ Value = g.Key, Count = g.Count() }).ToList();
 
 			var suits = (from c in Cards
 			             group c by c.Suit
 			             into g
 			             	where g.Count() == 5
-			             	select new { Suit = g.Key, Count = g.Count(), High = g.Max(c => c.Value) }).ToList();
+			             	select new SuitSet{ Suit = g.Key, Count = g.Count(), High = g.Max(c => c.Value) }).ToList();
 
 			foreach (var set in sets)
 			{

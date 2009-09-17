@@ -56,6 +56,7 @@
     <Compile Include="Scoring\IScore.cs" />
     <Compile Include="Scoring\ScoreBase.cs" />
     <Compile Include="Scoring\ScoreClass.cs" />
+    <Compile Include="SuitSet.cs" />
     <Compile Include="Tests\CardTests.cs" />
     <Compile Include="CardValue.cs" />
     <Compile Include="Hand.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Tests\SuitParserTests.cs" />
     <Compile Include="ValueParser.cs" />
     <Compile Include="Tests\ValueParserTests.cs" />
+    <Compile Include="ValueSet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
