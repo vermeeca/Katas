@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
+using PokerHandsKata.HandEvaluation;
 using PokerHandsKata.Scoring;
 
 namespace PokerHandsKata.Tests

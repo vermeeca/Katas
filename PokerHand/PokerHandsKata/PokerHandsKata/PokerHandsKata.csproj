@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1383A04F-665D-4B9B-8D61-67112630B3A2}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -52,6 +52,8 @@
     <Compile Include="Card.cs" />
     <Compile Include="CardSuit.cs" />
     <Compile Include="CardValueExtensions.cs" />
+    <Compile Include="HandEvaluation\HandEvaluation.cs" />
+    <Compile Include="HandEvaluation\HandEvaluationMap.cs" />
     <Compile Include="Scoring\HighCardScore.cs" />
     <Compile Include="Scoring\IScore.cs" />
     <Compile Include="Scoring\ScoreBase.cs" />
@@ -60,7 +62,7 @@
     <Compile Include="Tests\CardTests.cs" />
     <Compile Include="CardValue.cs" />
     <Compile Include="Hand.cs" />
-    <Compile Include="HandEvaluator.cs" />
+    <Compile Include="HandEvaluation\HandEvaluator.cs" />
     <Compile Include="Tests\HandEvaluatorTests.cs" />
     <Compile Include="Tests\PokerHandsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
