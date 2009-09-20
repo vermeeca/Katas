@@ -14,10 +14,22 @@ namespace BowlingKata
 
 		public int CalculateScore()
 		{
-			int dummy = 0;
-			return (from b in _balls
-			       where Int32.TryParse(b.ToString(), out dummy)
-			       select int.Parse(b.ToString())).Sum();
+			return CalculateScoreInternal(Frame.BeginningFrame, _balls);
+		}
+
+		private int CalculateScoreInternal(Frame lastFrame, char[] remainingBalls)
+		{
+
+			if(lastFrame.Number == 9)
+			{
+				return new Frame(lastFrame, remainingBalls).Score;
+			}
+			else
+			{
+				return lastFrame.Score + CalculateScoreInternal(new Frame(lastFrame, remainingBalls.Take(2).ToArray()),
+				                              remainingBalls.Take(remainingBalls.Length - 2).ToArray());
+			}
+			
 
 		}
 	}
