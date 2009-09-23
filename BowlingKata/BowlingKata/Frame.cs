@@ -5,34 +5,48 @@ namespace BowlingKata
 {
 	public class Frame
 	{
-		public static Frame BeginningFrame;
 
-		public Frame(Frame previousFrame, char[] balls)
+		public Frame(char[] balls)
 		{
-		    Number = CalculateCurrentFramePins(balls);
-			if(previousFrame.IsSpare)
-			{
-
-			}
+		    EvaluatePins(balls);
 		}
 
-	    protected bool IsSpare { get; set; }
+	    public Frame(string balls) : this(balls.ToCharArray())
+	    {
+	        
+	    }
 
-       
-	    private int CalculateCurrentFramePins(char[] balls)
+	    public int BallOne { get; set; }
+
+	    public int BallTwo { get; set; }
+
+        public bool IsSpare { get { return BallOne < 10 && BallOne + BallTwo == 10; } }
+
+	    public bool IsStrike { get{ return BallOne == 10;} }
+
+        private void EvaluatePins(char[] balls)
         {
-            if (Array.Exists<char>(balls, (b) => b == '/' || b == 'X'))
-            {
-                return 10;
-            }
-            int dummy = 0;
-            return (from b in balls
-                    where int.TryParse(b.ToString(), out dummy)
-                    select Convert.ToInt32(b.ToString())).Sum();
+            char ballOne = balls[0];
+            char ballTwo = balls[1];
+            BallOne = MatchesStrike(ballOne) ? 10 : EvaluateBall(ballOne);
+            BallTwo = MatchesSpare(ballTwo) ? 10 - BallOne : EvaluateBall(ballTwo);
         }
 
-	    public int Score{get;set;}
+	    private int EvaluateBall(char ball)
+	    {
+	        return ball == '-' ? 0 : int.Parse(ball.ToString());
+	    }
 
-		public int Number { get; set; }
+	    private bool MatchesSpare(char ball)
+	    {
+	        return ball == '/';
+	    }
+
+	    private bool MatchesStrike(char ball)
+	    {
+	        return ball == 'X';
+	    }
+
+	    public int Number { get; set; }
 	}
 }
