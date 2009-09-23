@@ -47,6 +47,6 @@ namespace BowlingKata
 	        return ball == 'X';
 	    }
 
-	    public int Number { get; set; }
+
 	}
 }

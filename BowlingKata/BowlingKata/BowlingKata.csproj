@@ -53,6 +53,8 @@
     <Compile Include="BowlingGame.cs" />
     <Compile Include="Tests\FrameTests.cs" />
     <Compile Include="Tests\GameTests.cs" />
+    <Compile Include="Score.cs" />
+    <Compile Include="Tests\ScoreTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

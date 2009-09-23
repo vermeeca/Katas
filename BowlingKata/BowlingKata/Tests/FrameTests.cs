@@ -19,8 +19,7 @@ namespace BowlingKata.Tests
             Assert.AreEqual(one, frame.BallOne);
             Assert.AreEqual(two, frame.BallTwo);
         }
-
-        
+   
 
         [TestCase("9-", false)]
         [TestCase("9/", true)]
