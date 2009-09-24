@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 
 namespace BowlingKata
 {
@@ -14,22 +15,32 @@ namespace BowlingKata
 
 		public int CalculateScore()
 		{
-			return CalculateScoreInternal(Frame.BeginningFrame, _balls);
+		    //return ScoreFrames(_balls).Sum(f => f.Score);
+		    throw new NotImplementedException();
 		}
 
-		private int CalculateScoreInternal(Frame lastFrame, char[] remainingBalls)
-		{
+	    private int ScoreFrames(char[] balls)
+	    {
+	        //return ScoreFramesInternal(0, balls)'
+	        throw new NotImplementedException();
+	    }
 
-			if(lastFrame.Number == 9)
-			{
-				return new Frame(lastFrame, remainingBalls).Score;
-			}
-			else
-			{
-				return lastFrame.Score + CalculateScoreInternal(new Frame(lastFrame, remainingBalls.Take(2).ToArray()),
-				                              remainingBalls.Take(remainingBalls.Length - 2).ToArray());
-			}
-			
+	    private int ScoreFramesInternal(int runningScore, char[] remainingBalls)
+		{
+            //totally not working.  Start over, starting with the frame class
+            //test it first this time, stupid
+
+            //Frame lastFrame = frames[frames.Count - 1];
+            //if(lastFrame.Number == 9)
+            //{
+            //    frames.Add(new Frame(lastFrame, remainingBalls));
+            //}
+            //else
+            //{
+            //    frames.Add(new Frame(lastFrame, remainingBalls.Take(2).ToArray()));
+            //    ScoreFramesInternal(frames, remainingBalls.Take(remainingBalls.Length - 2).ToArray());
+            //}
+	        throw new NotImplementedException();
 
 		}
 	}
