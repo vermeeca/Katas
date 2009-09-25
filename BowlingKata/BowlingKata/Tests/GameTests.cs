@@ -20,5 +20,13 @@ namespace BowlingKata.Tests
 
 			Assert.AreEqual(expectedScore, bg.GetScore());
 		}
+
+        [Test]
+        public void single_roll_should_be_number()
+        {
+            var bg = new BowlingGame();
+            bg.Roll('1');
+            Assert.AreEqual(1, bg.GetScore());
+        }
 	}
 }

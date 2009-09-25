@@ -7,7 +7,7 @@ namespace BowlingKata
 {
 	public class BowlingGame
 	{
-	    private Scorer _scorer = new Scorer();
+	    
 		public BowlingGame()
 		{
 			
@@ -15,14 +15,14 @@ namespace BowlingKata
 
 		public int GetScore()
 		{
-            return _scorer.CurrentScore;
+		    return 1;
 		}
 
 	   
 
 	    public void Roll(char ball)
 	    {
-	        _scorer.Roll(ball);
+	        
 	    }
 	}
 }
