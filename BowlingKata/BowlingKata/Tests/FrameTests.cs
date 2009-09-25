@@ -15,7 +15,9 @@ namespace BowlingKata.Tests
         [TestCase("5/", 5, 5)]
         public void TestFrameParsing(string balls, int one, int two)
         {
-            var frame = new Frame(balls);
+            var frame = new Frame();
+            Array.ForEach<char>(balls.ToCharArray(), frame.Roll);
+
             Assert.AreEqual(one, frame.BallOne);
             Assert.AreEqual(two, frame.BallTwo);
         }
@@ -26,7 +28,9 @@ namespace BowlingKata.Tests
         [TestCase("X-", false)]
         public void TestSpare(string balls, bool expected)
         {
-            Frame frame = new Frame(balls);
+            var frame = new Frame();
+            Array.ForEach<char>(balls.ToCharArray(), frame.Roll);
+
             Assert.AreEqual(expected, frame.IsSpare);
         }
 
@@ -35,7 +39,9 @@ namespace BowlingKata.Tests
         [TestCase("X-", true)]
         public void TsetStrike(string balls, bool expected)
         {
-            Frame frame = new Frame(balls);
+            var frame = new Frame();
+            Array.ForEach<char>(balls.ToCharArray(), frame.Roll);
+
             Assert.AreEqual(expected, frame.IsStrike);
         }
     }

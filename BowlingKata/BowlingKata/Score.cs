@@ -9,15 +9,28 @@ namespace BowlingKata
 
         private List<Frame> _frames = new List<Frame>();
 
-        public void AddFrame(Frame frame)
+        public void RollBall(char ball)
         {
+            Frame workingFrame = GetWorkingFrame();
+            workingFrame.Roll(ball);
+        }
+
+        private Frame GetWorkingFrame()
+        {
+            return _frames.Count > 0 && !_frames.Last().IsFull() ? _frames.Last() : NewFrame();
+        }
+
+        private Frame NewFrame()
+        {
+            Frame frame = new Frame();
             _frames.Add(frame);
+            return frame;
         }
 
         public int GetScore()
         {
             return (from f in _frames
-                    select f.BallOne + f.BallTwo).Sum();
+                    select f.BallOne.Value + f.BallTwo.Value).Sum();
         }
     }
 }
