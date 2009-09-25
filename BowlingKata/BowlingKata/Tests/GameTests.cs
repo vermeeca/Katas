@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
@@ -13,8 +14,11 @@ namespace BowlingKata.Tests
 		[TestCase("5/5/5/5/5/5/5/5/5/5/5", 150)]
 		public void TestGameScore(string game, int expectedScore)
 		{
-			int score = new BowlingGame(game).CalculateScore();
-			Assert.AreEqual(expectedScore, score);
+			//int score = new BowlingGame(game).CalculateScore();
+		    var bg = new BowlingGame();
+		    Array.ForEach<char>(game.ToCharArray(), bg.Roll);
+
+			Assert.AreEqual(expectedScore, bg.GetScore());
 		}
 	}
 }

@@ -7,41 +7,22 @@ namespace BowlingKata
 {
 	public class BowlingGame
 	{
-		private char[] _balls;
-		public BowlingGame(string game)
+	    private Scorer _scorer = new Scorer();
+		public BowlingGame()
 		{
-			_balls = game.ToCharArray();
+			
 		}
 
-		public int CalculateScore()
+		public int GetScore()
 		{
-		    //return ScoreFrames(_balls).Sum(f => f.Score);
-		    throw new NotImplementedException();
+            return _scorer.CurrentScore;
 		}
 
-	    private int ScoreFrames(char[] balls)
+	   
+
+	    public void Roll(char ball)
 	    {
-	        //return ScoreFramesInternal(0, balls)'
-	        throw new NotImplementedException();
+	        _scorer.Roll(ball);
 	    }
-
-	    private int ScoreFramesInternal(int runningScore, char[] remainingBalls)
-		{
-            //totally not working.  Start over, starting with the frame class
-            //test it first this time, stupid
-
-            //Frame lastFrame = frames[frames.Count - 1];
-            //if(lastFrame.Number == 9)
-            //{
-            //    frames.Add(new Frame(lastFrame, remainingBalls));
-            //}
-            //else
-            //{
-            //    frames.Add(new Frame(lastFrame, remainingBalls.Take(2).ToArray()));
-            //    ScoreFramesInternal(frames, remainingBalls.Take(remainingBalls.Length - 2).ToArray());
-            //}
-	        throw new NotImplementedException();
-
-		}
 	}
 }
