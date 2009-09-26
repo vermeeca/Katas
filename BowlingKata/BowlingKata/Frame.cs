@@ -11,8 +11,11 @@ namespace BowlingKata
         private List<char> _extraRolls = new List<char>();
 
         private static readonly Dictionary<char, Func<Frame, int>> map;
+        public bool StillScoring { get; private set; }
         private bool IsStrike{get;set;}
         private bool IsSpare{get;set;}
+
+        public int FrameNumber { get; private set; }
 
         static Frame()
         {
@@ -37,30 +40,43 @@ namespace BowlingKata
                       };
         }
 
-        public Frame()
+        public Frame() : this(0)
         {
-            IsOpen = true;
         }
 
+        public Frame(int frameNumber)
+        {
+            FrameNumber = frameNumber;
+            IsOpen = true;
+            StillScoring = true;
+        }
+
+        /// <summary>
+        /// Ugly ugly ugly
+        /// </summary>
+        /// <param name="c"></param>
         public void Roll(char c)
         {
+
             if(IsSpare)
             {
-                IsOpen = false;
+                StillScoring = false;
                 Score += ScoreBall(c);
+                IsOpen = FrameNumber < 10;
                 return;
             }
 
             if(IsStrike)
             {
+                IsOpen = FrameNumber == 10;
                 if(_extraRolls.Count == 1)
                 {
                     _extraRolls.Add(c);
-                    IsOpen = false;
+                    StillScoring = false;
                     Score += _extraRolls.Sum(e => ScoreBall(e));
                 }
                 else
-                {
+                {                   
                     _extraRolls.Add(c);
                 }
 
@@ -70,14 +86,17 @@ namespace BowlingKata
             if(_rolls.Count == 1)
             {
                 Score += ScoreBall(c);
-                IsOpen = IsSpare;
+                IsOpen = FrameNumber == 10 ? IsSpare : false;
+                StillScoring = IsSpare;
             }
             else
             {
                 _rolls.Add(c);
                 Score += ScoreBall(c);
+                IsOpen = FrameNumber == 10 ? true : !IsStrike;
             }
 
+            
         }
 
         public bool IsOpen { get; private set; }

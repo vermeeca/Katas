@@ -33,22 +33,31 @@ namespace BowlingKata.Tests
         }
 
         [Test]
-        public void spare_should_leave_frame_open()
+        public void spare_should_leave_frame_open_for_scoring()
         {
             var frame = new Frame();
             frame.Roll('1');
             frame.Roll('/');
-            Assert.AreEqual(true, frame.IsOpen);
+            Assert.AreEqual(true, frame.StillScoring);
         }
 
         [Test]
-        public void spare_should_close_after_one_ball()
+        public void spare_should_close_frame()
+        {
+            var frame = new Frame();
+            frame.Roll('1');
+            frame.Roll('/');
+            Assert.AreEqual(false, frame.IsOpen);
+        }
+
+        [Test]
+        public void spare_should_close_for_scoring_after_one_ball()
         {
             var frame = new Frame();
             frame.Roll('1');
             frame.Roll('/');
             frame.Roll('1');
-            Assert.AreEqual(false, frame.IsOpen);
+            Assert.AreEqual(false, frame.StillScoring);
         }
 
         [Test]
@@ -62,30 +71,38 @@ namespace BowlingKata.Tests
         }
 
         [Test]
-        public void strike_should_leave_frame_open()
+        public void strike_should_close_frame()
         {
             var frame = new Frame();
             frame.Roll('X');
-            Assert.AreEqual(true, frame.IsOpen);
-        }
-
-        [Test]
-        public void ball_after_strike_should_leave_frame_open()
-        {
-            var frame = new Frame();
-            frame.Roll('X');
-            frame.Roll('1');
-            Assert.AreEqual(true, frame.IsOpen);
-        }
-
-        [Test]
-        public void two_balls_after_strike_should_close_frame()
-        {
-            var frame = new Frame();
-            frame.Roll('X');
-            frame.Roll('1');
-            frame.Roll('1');
             Assert.AreEqual(false, frame.IsOpen);
+        }
+
+        [Test]
+        public void strike_should_leave_frame_open_for_scoring()
+        {
+            var frame = new Frame();
+            frame.Roll('X');
+            Assert.AreEqual(true, frame.StillScoring);
+        }
+
+        [Test]
+        public void ball_after_strike_should_leave_frame_open_for_scoring()
+        {
+            var frame = new Frame();
+            frame.Roll('X');
+            frame.Roll('1');
+            Assert.AreEqual(true, frame.StillScoring);
+        }
+
+        [Test]
+        public void two_balls_after_strike_should_close_frame_for_scoring()
+        {
+            var frame = new Frame();
+            frame.Roll('X');
+            frame.Roll('1');
+            frame.Roll('1');
+            Assert.AreEqual(false, frame.StillScoring);
         }
         [Test]
         public void two_balls_after_strike_should_sum_2()

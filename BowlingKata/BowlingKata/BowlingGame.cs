@@ -9,7 +9,8 @@ namespace BowlingKata
 	{
 	    private List<char> _allRolls = new List<char>();
 	    private List<Frame> _allframes = new List<Frame>();
-	    private List<Frame> _openFrames = new List<Frame>();
+	    private List<Frame> _scoringFrames = new List<Frame>();
+	    private Frame _lastFrame;
         
 		public BowlingGame()
 		{
@@ -26,15 +27,16 @@ namespace BowlingKata
 
 	    public void Roll(char ball)
 	    {
-            if(_allRolls.Count % 2 == 0)
+            if(_lastFrame == null || !_lastFrame.IsOpen)
             {
-                Frame f = new Frame();
-                _openFrames.Add(f);
+                Frame f = new Frame(_lastFrame == null ? 1 : _lastFrame.FrameNumber + 1);
+                _scoringFrames.Add(f);
                 _allframes.Add(f);
+                _lastFrame = f;
             }
 
-	        _openFrames.ForEach(f => f.Roll(ball));
-	        _openFrames.RemoveAll(f => !f.IsOpen);
+	        _scoringFrames.ForEach(f => f.Roll(ball));
+            _scoringFrames.RemoveAll(f => !f.StillScoring);
 
 	        _allRolls.Add(ball);
 

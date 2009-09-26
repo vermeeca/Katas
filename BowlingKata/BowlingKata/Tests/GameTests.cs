@@ -19,7 +19,9 @@ namespace BowlingKata.Tests
 
 	    [TestCase("9-9-9-9-9-9-9-9-9-9-", 90)]
 		[TestCase("XXXXXXXXXXXX", 300)]
-		[TestCase("5/5/5/5/5/5/5/5/5/5/5", 155)]
+        [TestCase("XXXXXXXXXXX9", 299)]
+        [TestCase("XXXXXXXXX--", 240)]
+		[TestCase("5/5/5/5/5/5/5/5/5/5/5", 150)]
         [TestCase("5/5", 20)]
 		public void TestGameScore(string game, int expectedScore)
 		{
