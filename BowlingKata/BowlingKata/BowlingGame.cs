@@ -7,28 +7,37 @@ namespace BowlingKata
 {
 	public class BowlingGame
 	{
-	    private List<char> rolled;
-
+	    private List<char> _allRolls = new List<char>();
+	    private List<Frame> _allframes = new List<Frame>();
+	    private List<Frame> _openFrames = new List<Frame>();
+        
 		public BowlingGame()
 		{
-		    rolled = new List<char>();
+
 		}
 
 		public int GetScore()
 		{
-		    return rolled.Sum(c => ScoreRoll(c));
+		    return _allframes.Sum(f => f.Score);
 		}
 
-        public int ScoreRoll(char ball)
-        {
-            return ball == '-' ? 0 : Convert.ToInt32(ball.ToString());
-        }
-
+        
 
 
 	    public void Roll(char ball)
 	    {
-	        rolled.Add(ball);
+            if(_allRolls.Count % 2 == 0)
+            {
+                Frame f = new Frame();
+                _openFrames.Add(f);
+                _allframes.Add(f);
+            }
+
+	        _openFrames.ForEach(f => f.Roll(ball));
+	        _openFrames.RemoveAll(f => !f.IsOpen);
+
+	        _allRolls.Add(ball);
+
 	    }
 	}
 }

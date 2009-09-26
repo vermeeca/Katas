@@ -18,8 +18,9 @@ namespace BowlingKata.Tests
         }
 
 	    [TestCase("9-9-9-9-9-9-9-9-9-9-", 90)]
-		[TestCase("X-X-X-X-X-X-X-X-X-X-XX", 300)]
-		[TestCase("5/5/5/5/5/5/5/5/5/5/5", 150)]
+		[TestCase("XXXXXXXXXXXX", 300)]
+		[TestCase("5/5/5/5/5/5/5/5/5/5/5", 155)]
+        [TestCase("5/5", 20)]
 		public void TestGameScore(string game, int expectedScore)
 		{
 		    Array.ForEach<char>(game.ToCharArray(), bg.Roll);

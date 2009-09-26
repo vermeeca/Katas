@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BowlingGame.cs" />
+    <Compile Include="Frame.cs" />
+    <Compile Include="Tests\FrameTests.cs" />
     <Compile Include="Tests\GameTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
