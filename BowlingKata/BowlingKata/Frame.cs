@@ -33,7 +33,7 @@ namespace BowlingKata
                           {'9', f => 9},
                           {'/', f => {
                                          f.IsSpare = true;
-                                         return 10 - f.Score; }},
+                                         return 10 - f.ScoreBall(f._rolls.Last()); }},
                           {'X', f => {
                                          f.IsStrike = true;
                                          return 10; }}
@@ -57,11 +57,12 @@ namespace BowlingKata
         /// <param name="c"></param>
         public void Roll(char c)
         {
-
+            
             if(IsSpare)
             {
                 StillScoring = false;
                 Score += ScoreBall(c);
+                _rolls.Add(c);
                 IsOpen = FrameNumber < 10;
                 return;
             }
@@ -73,12 +74,15 @@ namespace BowlingKata
                 {
                     _extraRolls.Add(c);
                     StillScoring = false;
-                    Score += _extraRolls.Sum(e => ScoreBall(e));
+                    //Score += _extraRolls.Sum(e => { int ret = ScoreBall(e); _rolls.Add(c); return ret; });
                 }
                 else
                 {                   
                     _extraRolls.Add(c);
                 }
+
+                Score += ScoreBall(c);
+                _rolls.Add(c);
 
                 return;
             }
@@ -86,13 +90,14 @@ namespace BowlingKata
             if(_rolls.Count == 1)
             {
                 Score += ScoreBall(c);
+                _rolls.Add(c);
                 IsOpen = FrameNumber == 10 ? IsSpare : false;
                 StillScoring = IsSpare;
             }
             else
             {
-                _rolls.Add(c);
                 Score += ScoreBall(c);
+                _rolls.Add(c);
                 IsOpen = FrameNumber == 10 ? true : !IsStrike;
             }
 
