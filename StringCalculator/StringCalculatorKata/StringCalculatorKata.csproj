@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="2009_12_02\NegativeNumbersNotSupportedException.cs" />
     <Compile Include="2009_12_02\StringCalculator.cs" />
     <Compile Include="2009_12_02\StringCalculatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

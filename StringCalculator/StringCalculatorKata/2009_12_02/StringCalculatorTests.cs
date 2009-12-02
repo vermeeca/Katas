@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
@@ -33,6 +32,46 @@ namespace StringCalculatorKata._2009_12_02
         public void SumOneTwo()
         {
             Assert.AreEqual(3, sut.Sum("1,2"));
+        }
+
+        [Test]
+        public void SumOneTwoThree()
+        {
+            Assert.AreEqual(6, sut.Sum("1,2,3"));
+        }
+
+        [Test]
+        public void SupportNewLines()
+        {
+            Assert.AreEqual(3, sut.Sum("1\n2"));
+        }
+
+        [Test]
+        public void SupportDifferentDeliiter()
+        {
+            Assert.AreEqual(3, sut.Sum("//;\n1;2"));
+        }
+
+        [Test]
+        public void ShouldNotSupportNegatives()
+        {
+            Assert.Throws(typeof (NegativeNumbersNotSupportedException), () => sut.Sum("-1,2"));
+        }
+
+        [Test]
+        public void NegativeNumberExceptionShouldShowAllNegatives()
+        {
+            try
+            {
+                sut.Sum("-1,-2,3");
+            }
+            catch(NegativeNumbersNotSupportedException ex)
+            {
+                Assert.AreEqual("negatives not allowed - -1,-2", ex.Message);
+                return;
+            }
+
+            Assert.Fail();
         }
 	}
 }
